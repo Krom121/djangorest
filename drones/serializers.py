@@ -52,7 +52,7 @@ class PilotSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url','name','gender','gender_description','races_count','inserted_timestamp','competitions')
 
 
- class PilotCompetitionSerializer(serializers.ModelSerializer): 
+class PilotCompetitionSerializer(serializers.ModelSerializer): 
     # Display the pilot's name 
     pilot = serializers.SlugRelatedField(queryset=Pilot.objects.all(), slug_field='name') 
     # Display the drone's name 
