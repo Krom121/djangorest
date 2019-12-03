@@ -32,7 +32,7 @@ class Pilot(models.Model):
         (MALE, 'Male'), 
         (FEMALE, 'Female'), 
     ) 
-    name = models.CharField(max_length=150, blank=False, default='') 
+    name = models.CharField(max_length=150, blank=False, default='', unique=True) 
     gender = models.CharField( max_length=2, choices=GENDER_CHOICES, default=MALE, 
     ) 
     races_count = models.IntegerField() 
