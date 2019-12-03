@@ -61,7 +61,6 @@ class CompetitionDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 # API END POINT
-
 class ApiRoot(generics.GenericAPIView): 
     name = 'api-root' 
     def get(self, request, *args, **kwargs): 
