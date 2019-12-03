@@ -3,7 +3,9 @@ from rest_framework import generics
 from rest_framework.response import Response 
 from rest_framework.reverse import reverse 
 from rest_framework import filters
-from rest_framework import permissions 
+from rest_framework import permissions
+from rest_framework.permissions import IsAuthenticated 
+from rest_framework.authentication import TokenAuthentication 
 from drones.models import DroneCategory 
 from drones.models import Drone 
 from drones.models import Pilot 
@@ -87,12 +89,24 @@ class PilotList(generics.ListCreateAPIView):
         'name', 
         'races_count' 
         )
- 
+    authentication_classes = (
+        TokenAuthentication,
+        )
+    permission_classes = (
+        IsAuthenticated,
+        )
+        
 class PilotDetail(generics.RetrieveUpdateDestroyAPIView): 
     queryset = Pilot.objects.all() 
     serializer_class = PilotSerializer 
     name = 'pilot-detail' 
- 
+    authentication_classes = (
+        TokenAuthentication,
+        )
+    permission_classes = (
+        IsAuthenticated,
+        )
+
 class CompetitionFilter(django_filters.FilterSet): 
     from_achievement_date = DateTimeFilter( 
         name='distance_achievement_date', lookup_expr='gte') 
