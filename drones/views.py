@@ -2,7 +2,8 @@ from django.shortcuts import render
 from rest_framework import generics 
 from rest_framework.response import Response 
 from rest_framework.reverse import reverse 
-from rest_framework import filters 
+from rest_framework import filters
+from rest_framework import permissions 
 from drones.models import DroneCategory 
 from drones.models import Drone 
 from drones.models import Pilot 
@@ -13,7 +14,7 @@ from drones.serializers import PilotSerializer
 from drones.serializers import PilotCompetitionSerializer 
 import django_filters
 from django_filters import AllValuesFilter, DateTimeFilter, NumberFilter 
- 
+from drones import custompermissions 
 
 
 class DroneCategoryList(generics.ListCreateAPIView): 
@@ -53,12 +54,22 @@ class DroneList(generics.ListCreateAPIView):
         'name', 
         'manufacturing_date', 
         )
- 
+    permission_classes = ( 
+        permissions.IsAuthenticatedOrReadOnly, 
+        custompermissions.IsCurrentUserOwnerOrReadOnly, 
+        )    
+    def perform_create(self, serializer): 
+        serializer.save(owner=self.request.user)
+
+
 class DroneDetail(generics.RetrieveUpdateDestroyAPIView): 
     queryset = Drone.objects.all() 
     serializer_class = DroneSerializer 
     name = 'drone-detail' 
- 
+    permission_classes = ( 
+        permissions.IsAuthenticatedOrReadOnly, 
+        custompermissions.IsCurrentUserOwnerOrReadOnly, 
+        )
  
 class PilotList(generics.ListCreateAPIView): 
     queryset = Pilot.objects.all() 
