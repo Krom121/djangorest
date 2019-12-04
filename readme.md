@@ -1,9 +1,9 @@
 # Django Rest Framework Project
 
-The objective of this project is learn how to use Django Rest Framework effectivly to build a project
+The objective of this project is learn how to use Django Rest Framework effectively to build a project
 idea that would use this frame work as a backend to a React.js frontend.
 
-The book I read was written by Gaston C. Hillar and published in June 2018.
+The book I read was written by Gaston C. Hillar and published in January 2018.
 This book uses Django version 1.11, which I updated to django == "*", as I use Pipenv for an enviroment.
 I go for the lastest version of Django at this moment django version 3.
 
@@ -19,4 +19,14 @@ Providing correct urls form the views.
 
 The use of Postman to test the api's are functioning as expected.
 
+Browserable api.
+
 Working with advanced relationships between different models and serializations.
+
+The use od model serializers and hyper linked model serializers.
+
+The use of constraints, filtering, searching, ordering and pagination.
+
+Throttling rules, that where kept high for testing purposes.
+
+And of course pytests.
